@@ -1,5 +1,7 @@
 import express from "express";
 let app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/alumno", (req, res,next) => {
     res.send([
@@ -9,9 +11,10 @@ app.get("/alumno", (req, res,next) => {
     ])
 });
 
-app.post("/alumnoPost/:nombre",(req, res,next) => {
+app.post("/alumnoPost",(req, res,next) => {
     try {
-        const nombre = req.params.nombre;
+        const {nombre} = req.body;
+        console.log("Esto tiene reqbody: ",req.body)
         return res.json({
             alumno:nombre
         })
